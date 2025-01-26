@@ -8,15 +8,15 @@ export default function TabLayout() {
                 headerShown: false
             }}>
             <Tabs.Screen
-                name="index"
+                name="login"
                 options={{
-                    title: 'Home'
+                    title: 'Login'
                 }}
             />
             <Tabs.Screen
-                name="booking"
+                name="signup"
                 options={{
-                    title: 'Booking'
+                    title: 'Sign up'
                 }}
             />
         </Tabs>
