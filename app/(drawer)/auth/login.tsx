@@ -5,18 +5,26 @@ import { useForm, Controller } from "react-hook-form";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link } from 'expo-router';
+import { setAccessToken } from '@/app/redux/features/authSlice';
+import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 
 type FormData = {
   username: string;
   password: string;
 };
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector(state => state.auth);
+  console.log('auth:', auth);
+
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       username: '', password: ''
     }
   });
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = (data: FormData) => {
+    dispatch(setAccessToken("hehe"));
+  }
 
   return (
     <SafeAreaView className='px-5'>
@@ -73,7 +81,7 @@ const Login = () => {
           onPress={handleSubmit(onSubmit)}>
           <Text className='text-xl text-white font-bold'>Log in</Text>
         </TouchableOpacity>
-        <Link href='/(auth)/signup' className='mt-4 text-primary text-center text-lg font-semibold'>
+        <Link href='/auth/signup' className='mt-4 text-primary text-center text-lg font-semibold'>
           No account yet? Sign up
         </Link>
       </View>

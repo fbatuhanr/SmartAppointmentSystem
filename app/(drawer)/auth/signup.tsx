@@ -94,7 +94,7 @@ const Signup = () => {
           onPress={handleSubmit(onSubmit)}>
           <Text className='text-xl text-white font-bold'>Sign Up</Text>
         </TouchableOpacity>
-        <Link href='/(auth)/login' className='mt-4 text-primary text-center text-lg font-semibold'>
+        <Link href='/auth/login' className='mt-4 text-primary text-center text-lg font-semibold'>
           Already have an account? Login
         </Link>
       </View>

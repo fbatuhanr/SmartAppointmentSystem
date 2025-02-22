@@ -4,7 +4,7 @@ import { Link, Redirect } from 'expo-router'
 
 const Onboard = () => {
   return (
-    <Redirect href='/(tabs)'/>
+    <Redirect href='/(drawer)/(tabs)'/>
   )
 }
 

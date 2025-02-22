@@ -1,5 +1,5 @@
 import { View, Text, Image, Alert, SafeAreaView, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 import { sampleProfessionals } from '../data/sample';
@@ -12,9 +12,7 @@ const ProfessionalDetail: React.FC = () => {
 
     const { id } = useLocalSearchParams();
     const { name, branch, description, rating, cover } = sampleProfessionals.find(i => i.id === id) || {};
-
-
-    console.log('re render !!!');
+    const [data, setData] = useState({name, branch, description, rating, cover});
 
     const days = getNextDays(10);
     const times = getTimeSlots(8, 18);
@@ -23,6 +21,22 @@ const ProfessionalDetail: React.FC = () => {
         date: '',
         time: ''
     });
+
+    useEffect(() => {
+    const request = async () => {
+
+        try {
+            const result = await fetch(`https://smartappointmentsystem.onrender.com/api/doctor/${id}`);
+            const response = await result.json();
+            setData(response);
+        }
+        catch {
+
+        }
+    };
+
+    request();
+    }, []);
 
     const Slot = ({ item, type }: { item: string, type: 'Day' | 'Time' }) => {
 

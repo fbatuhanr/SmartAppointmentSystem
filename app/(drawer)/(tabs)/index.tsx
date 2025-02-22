@@ -1,19 +1,57 @@
 import { View, SafeAreaView, Text, Image, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { AntDesign, Fontisto } from '@expo/vector-icons'
-import { Colors } from '../constants/Colors'
-import { Link, router } from 'expo-router'
+import React, { useEffect, useState } from 'react'
+import { Drawer } from 'expo-router/drawer';
+import { AntDesign, Fontisto, Ionicons } from '@expo/vector-icons'
+import { Colors } from '../../constants/Colors'
+import { Link, router, useNavigation } from 'expo-router'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
-import { sampleBranches, sampleProfessionals } from '../data/sample'
-import ProfessionalCard from '../components/cards/DoctorCard'
-import BranchCard from '../components/cards/BranchCard'
+import { sampleBranches, sampleProfessionals } from '../../data/sample'
+import ProfessionalCard from '../../components/cards/DoctorCard'
+import BranchCard from '../../components/cards/BranchCard'
 import FILTERS from '@/app/constants/filters'
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 const Home = () => {
+
+  const navigation = useNavigation();
+  const parentNavigation = navigation.getParent() as DrawerNavigationProp<any>;
+
+  const [professionals, setProfessionals] = useState(sampleProfessionals);
+  // console.log('original:');
+  // console.log(professionals);
+  useEffect(() => {
+    const request = async () => {
+
+      const result = await fetch('https://smartappointmentsystem.onrender.com/api/doctor/all');
+      const response = await result.json();
+      //console.log(response);
+
+      setProfessionals((prev) => ([
+        ...prev,
+        ...response
+      ]))
+    };
+
+    request();
+  }, []);
+
+  useEffect(() => {
+    // console.log('modified:');
+    // console.log(professionals);
+  }, [professionals]);
+
   return (
     <SafeAreaView>
+      <Drawer />
       <ScrollView contentContainerClassName='ml-5 pb-8' showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         <View className='mr-5 flex-row items-center justify-between'>
+          <TouchableOpacity
+            onPress={() => {
+              parentNavigation.openDrawer();
+            }}
+          >
+            <Ionicons name="menu" size={24} color="black" />
+          </TouchableOpacity>
           <Text className='text-lg font-nunito-medium'>Hi, John!</Text>
           <View className='w-12 h-12 rounded-xl overflow-hidden'>
             <Image source={require('@/assets/images/example/user.jpg')} className='w-full h-full' />
@@ -57,7 +95,7 @@ const Home = () => {
           </View>
           <View className='mt-5 flex-row gap-x-2'>
             <FlatList
-              data={sampleProfessionals}
+              data={professionals}
               renderItem={({ item }) => <ProfessionalCard {...item} />}
               keyExtractor={(item) => item.id}
               horizontal

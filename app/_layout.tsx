@@ -27,6 +27,7 @@ import '../global.css';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+import StoreProvider from './providers/StoreProvider';
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -63,80 +64,82 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="details/[id]"
-          options={{
-            headerTransparent: true,
-            header: ({ navigation }) => (
-              <LinearGradient colors={['rgba(0, 0, 0, 1)', 'rgba(0, 0, 0, 0)']} className='flex-1' start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
-                <SafeAreaView>
-                  <View className='flex-row px-4 py-1 justify-between items-center'>
+    <StoreProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack>
+          <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="details/[id]"
+            options={{
+              headerTransparent: true,
+              header: ({ navigation }) => (
+                <LinearGradient colors={['rgba(0, 0, 0, 1)', 'rgba(0, 0, 0, 0)']} className='flex-1' start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
+                  <SafeAreaView>
+                    <View className='flex-row px-4 py-1 justify-between items-center'>
+                      <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <AntDesign name="left" size={26} color="white" />
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => console.log('Menu Clicked')}>
+                        <Ionicons name="ellipsis-vertical" size={24} color="white" />
+                      </TouchableOpacity>
+                    </View>
+                  </SafeAreaView>
+                </LinearGradient>
+              )
+            }}
+          />
+          <Stack.Screen name="listing/BranchDoctors"
+            options={({ route }) => ({
+              header: ({ navigation }) => (
+                <SafeAreaView className='bg-white'>
+                  <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                      <AntDesign name="left" size={26} color="white" />
+                      <AntDesign name="left" size={26} color="black" />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => console.log('Menu Clicked')}>
-                      <Ionicons name="ellipsis-vertical" size={24} color="white" />
-                    </TouchableOpacity>
+                    <View className='absolute top-1 left-0 right-0 items-center'>
+                      <Text className='text-2xl font-nunito-bold'>{route.params?.branchTitle ?? ''} Doctors</Text>
+                    </View>
                   </View>
                 </SafeAreaView>
-              </LinearGradient>
-            )
-          }}
-        />
-        <Stack.Screen name="listing/BranchDoctors"
-          options={({ route }) => ({
-            header: ({ navigation }) => (
-              <SafeAreaView className='bg-white'>
-                <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
-                  <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <AntDesign name="left" size={26} color="black" />
-                  </TouchableOpacity>
-                  <View className='absolute top-1 left-0 right-0 items-center'>
-                    <Text className='text-2xl font-nunito-bold'>{route.params?.branchTitle ?? ''} Doctors</Text>
+              )
+            })}
+          />
+          <Stack.Screen name="listing/Branches"
+            options={{
+              header: ({ navigation }) => (
+                <SafeAreaView className='bg-white'>
+                  <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                      <AntDesign name="left" size={26} color="black" />
+                    </TouchableOpacity>
+                    <View className='absolute top-1 left-0 right-0 items-center'>
+                      <Text className='text-2xl font-nunito-bold'>All Branches</Text>
+                    </View>
                   </View>
-                </View>
-              </SafeAreaView>
-            )
-          })}
-        />
-        <Stack.Screen name="listing/Branches"
-          options={{
-            header: ({ navigation }) => (
-              <SafeAreaView className='bg-white'>
-                <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
-                  <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <AntDesign name="left" size={26} color="black" />
-                  </TouchableOpacity>
-                  <View className='absolute top-1 left-0 right-0 items-center'>
-                    <Text className='text-2xl font-nunito-bold'>All Branches</Text>
+                </SafeAreaView>
+              )
+            }}
+          />
+          <Stack.Screen name="listing/Doctors"
+            options={({ route }) => ({
+              header: ({ navigation }) => (
+                <SafeAreaView className='bg-white'>
+                  <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                      <AntDesign name="left" size={26} color="black" />
+                    </TouchableOpacity>
+                    <View className='absolute top-1 left-0 right-0 items-center'>
+                      <Text className='text-2xl font-nunito-bold'>{route.params?.filter ?? ''} Doctors</Text>
+                    </View>
                   </View>
-                </View>
-              </SafeAreaView>
-            )
-          }}
-        />
-        <Stack.Screen name="listing/Doctors"
-          options={({ route }) => ({
-            header: ({ navigation }) => (
-              <SafeAreaView className='bg-white'>
-                <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
-                  <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <AntDesign name="left" size={26} color="black" />
-                  </TouchableOpacity>
-                  <View className='absolute top-1 left-0 right-0 items-center'>
-                    <Text className='text-2xl font-nunito-bold'>{route.params?.filter ?? ''} Doctors</Text>
-                  </View>
-                </View>
-              </SafeAreaView>
-            )
-          })}
-        />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </GestureHandlerRootView>
+                </SafeAreaView>
+              )
+            })}
+          />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </GestureHandlerRootView>
+    </StoreProvider>
   );
 }

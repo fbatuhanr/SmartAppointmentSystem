@@ -6,15 +6,15 @@ import { Link } from 'expo-router';
 export interface DoctorCardProps {
     id: string;
     name: string;
-    type: string;
+    type?: string;
     branch: string;
-    rating: number;
+    rating?: number;
     description: string;
-    cover: ImageSourcePropType;
+    cover?: ImageSourcePropType;
     timeSlots?: any
 }
 const DoctorCard: React.FC<DoctorCardProps> = ({
-    id, name, branch, rating, cover
+    id, name, branch, rating = 0, cover
 }) => {
     return (
         <View className='w-44 h-auto mr-2 rounded-xl relative'>

@@ -1,5 +1,5 @@
 import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
@@ -11,12 +11,29 @@ import FILTERS from '../constants/filters';
 const Doctors = () => {
 
     const { filter } = useLocalSearchParams(); // FILTERS
+ const [professionals, setProfessionals] = useState(sampleProfessionals);
+  // console.log('original:');
+  // console.log(professionals);
+  useEffect(() => {
+    const request = async () => {
 
+      const result = await fetch('https://smartappointmentsystem.onrender.com/api/doctor/all');
+      const response = await result.json();
+      //console.log(response);
+
+      setProfessionals((prev) => ([
+        ...prev,
+        ...response
+      ]))
+    };
+
+    request();
+  }, []);
     return (
         <SafeAreaView>
             <View className='p-5'>
                 <FlatList
-                    data={sampleProfessionals}
+                    data={professionals}
                     renderItem={({ item }) => <ProfessionalCardWide {...item} />}
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
