@@ -5,8 +5,8 @@ import { useForm, Controller } from "react-hook-form";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link } from 'expo-router';
-import { setAccessToken } from '@/app/redux/features/authSlice';
-import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
+import { setAccessToken } from '@/src/redux/features/authSlice';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/useRedux';
 
 type FormData = {
   username: string;
@@ -33,7 +33,7 @@ const Login = () => {
           <Text className='text-4xl text-dark font-bold'>Welcome Back!</Text>
           <Text className=''>Use Credentials to acees your account</Text>
         </View>
-        <View className='h-14 mt-12 flex-row items-center rounded-xl border border-graey'>
+        <View className='h-14 mt-12 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="user" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller
             control={control}
@@ -53,7 +53,7 @@ const Login = () => {
           />
         </View>
         {errors.username && <Text>This is required.</Text>}
-        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-graey'>
+        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="lock" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller
             control={control}

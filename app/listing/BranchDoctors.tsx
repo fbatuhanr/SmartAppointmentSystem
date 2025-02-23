@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { sampleProfessionals } from '../data/sample';
+import { sampleProfessionals } from '@/src/data/sample';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import ProfessionalCardWide from '../components/cards/DoctorCardWide';
+import ProfessionalCardWide from '@/src/components/cards/DoctorCardWide';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 const BranchDoctors = () => {

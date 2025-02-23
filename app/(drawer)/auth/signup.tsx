@@ -26,7 +26,7 @@ const Signup = () => {
           <Text className='text-4xl text-dark font-bold'>Create an Account</Text>
           <Text className=''>Please fill this detail to create an account</Text>
         </View>
-        <View className='h-14 mt-12 flex-row items-center rounded-xl border border-graey'>
+        <View className='h-14 mt-12 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="user" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller
             control={control}
@@ -46,7 +46,7 @@ const Signup = () => {
           />
         </View>
         {errors.username && <Text>This is required.</Text>}
-        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-graey'>
+        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="mail" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller
             control={control}
@@ -66,7 +66,7 @@ const Signup = () => {
           />
         </View>
         {errors.email && <Text>This is required.</Text>}
-        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-graey'>
+        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="lock" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller
             control={control}

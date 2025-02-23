@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Colors } from '../../constants/Colors';
+import { Colors } from '@/src/constants/Colors';
 
 export default function TabLayout() {
     return (
@@ -14,13 +14,13 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Home'
+                    title: 'Browse'
                 }}
             />
             <Tabs.Screen
-                name="booking"
+                name="appointments"
                 options={{
-                    title: 'Booking'
+                    title: 'Appointments'
                 }}
             />
         </Tabs>

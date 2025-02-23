@@ -2,10 +2,10 @@ import { View, Text, Image, Alert, SafeAreaView, TouchableOpacity } from 'react-
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
-import { sampleProfessionals } from '../data/sample';
+import { sampleProfessionals } from '@/src/data/sample';
 import { StatusBar } from 'expo-status-bar';
-import { clipText } from '../utils/textUtils';
-import { getNextDays, getTimeSlots } from '../utils/dateUtils';
+import { clipText } from '@/src/utils/textUtils';
+import { getNextDays, getTimeSlots } from '@/src/utils/dateUtils';
 import { FlatList } from 'react-native-gesture-handler';
 
 const ProfessionalDetail: React.FC = () => {

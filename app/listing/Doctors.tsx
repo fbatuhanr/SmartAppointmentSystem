@@ -1,12 +1,10 @@
-import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams } from 'expo-router';
 import { FlatList } from 'react-native-gesture-handler';
-import { sampleProfessionals } from '../data/sample';
-import ProfessionalCardWide from '../components/cards/DoctorCardWide';
-import FILTERS from '../constants/filters';
+import { sampleProfessionals } from '@/src/data/sample';
+import ProfessionalCardWide from '@/src/components/cards/DoctorCardWide';
+import FILTERS from '@/src/constants/filters';
 
 const Doctors = () => {
 

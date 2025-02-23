@@ -1,17 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // NOTE: Update this to include the paths to all of your component files.
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}"
+  ],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
       colors: {
         primary: '#7563F7',
         primaryDark: '#4437A1',
+    
         dark: '#0E0D18',
+        darkish: '#16151f',
+    
         light_1: '#FAFAFA',
         light_2: '#F3F2F3',
-        graey: '#9CA3AF'
+    
+        lightGrey: '#9CA3AF',
+        darkGrey: '#42454a',
+  
+        black: '#000000',
+        white: '#FFFFFF',
       },
       fontFamily: {
         "nunito-extralight": "Nunito_200ExtraLight",

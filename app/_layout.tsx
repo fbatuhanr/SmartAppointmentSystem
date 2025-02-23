@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
+import StoreProvider from '@/src/providers/StoreProvider';
 import {
   useFonts,
   Nunito_200ExtraLight,
@@ -23,11 +27,7 @@ import {
   Nunito_900Black_Italic,
 } from '@expo-google-fonts/nunito';
 import 'react-native-reanimated';
-import '../global.css';
-import { LinearGradient } from 'expo-linear-gradient';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
-import StoreProvider from './providers/StoreProvider';
+import '@/src/global.css';
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
