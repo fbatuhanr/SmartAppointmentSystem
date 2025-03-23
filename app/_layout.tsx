@@ -6,52 +6,17 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { useFonts, Nunito_200ExtraLight, Nunito_300Light, Nunito_400Regular, Nunito_500Medium, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold, Nunito_900Black, Nunito_200ExtraLight_Italic, Nunito_300Light_Italic, Nunito_400Regular_Italic, Nunito_500Medium_Italic, Nunito_600SemiBold_Italic, Nunito_700Bold_Italic, Nunito_800ExtraBold_Italic, Nunito_900Black_Italic } from '@expo-google-fonts/nunito';
+import ToastManager from 'toastify-react-native';
 import StoreProvider from '@/src/providers/StoreProvider';
-import {
-  useFonts,
-  Nunito_200ExtraLight,
-  Nunito_300Light,
-  Nunito_400Regular,
-  Nunito_500Medium,
-  Nunito_600SemiBold,
-  Nunito_700Bold,
-  Nunito_800ExtraBold,
-  Nunito_900Black,
-  Nunito_200ExtraLight_Italic,
-  Nunito_300Light_Italic,
-  Nunito_400Regular_Italic,
-  Nunito_500Medium_Italic,
-  Nunito_600SemiBold_Italic,
-  Nunito_700Bold_Italic,
-  Nunito_800ExtraBold_Italic,
-  Nunito_900Black_Italic,
-} from '@expo-google-fonts/nunito';
 import 'react-native-reanimated';
 import '@/src/global.css';
-
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded] = useFonts({
-    Nunito_200ExtraLight,
-    Nunito_300Light,
-    Nunito_400Regular,
-    Nunito_500Medium,
-    Nunito_600SemiBold,
-    Nunito_700Bold,
-    Nunito_800ExtraBold,
-    Nunito_900Black,
-    Nunito_200ExtraLight_Italic,
-    Nunito_300Light_Italic,
-    Nunito_400Regular_Italic,
-    Nunito_500Medium_Italic,
-    Nunito_600SemiBold_Italic,
-    Nunito_700Bold_Italic,
-    Nunito_800ExtraBold_Italic,
-    Nunito_900Black_Italic,
-  });
+  const [loaded] = useFonts({ Nunito_200ExtraLight, Nunito_300Light, Nunito_400Regular, Nunito_500Medium, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold, Nunito_900Black, Nunito_200ExtraLight_Italic, Nunito_300Light_Italic, Nunito_400Regular_Italic, Nunito_500Medium_Italic, Nunito_600SemiBold_Italic, Nunito_700Bold_Italic, Nunito_800ExtraBold_Italic, Nunito_900Black_Italic });
 
   useEffect(() => {
     if (loaded) {
@@ -65,6 +30,7 @@ export default function RootLayout() {
 
   return (
     <StoreProvider>
+      <ToastManager />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack>
           <Stack.Screen name="(drawer)" options={{ headerShown: false }} />

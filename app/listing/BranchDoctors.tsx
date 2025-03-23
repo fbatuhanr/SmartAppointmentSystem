@@ -1,28 +1,39 @@
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { sampleProfessionals } from '@/src/data/sample';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import ProfessionalCardWide from '@/src/components/cards/DoctorCardWide';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { AntDesign } from '@expo/vector-icons';
+import { useLocalSearchParams } from 'expo-router';
+import { useDoctor } from '@/src/hooks/doctor/useDoctor';
+import DoctorCardWide from '@/src/components/cards/DoctorCardWide';
+import DoctorCardWideSkeleton from '@/src/components/cards/DoctorCardWideSkeleton';
+import { skeletonData } from '@/src/data/skeletonData';
+
 const BranchDoctors = () => {
 
     const { branchId, branchTitle } = useLocalSearchParams();
 
+    const { getDoctorsByBranchId } = useDoctor();
+    const { data, loading, error } = getDoctorsByBranchId(branchId as string);
+
     return (
         <SafeAreaView>
-            <View className='p-5'>
-                <FlatList
-                    data={sampleProfessionals.filter(i => i.branch === branchTitle)}
-                    renderItem={({ item }) => <ProfessionalCardWide {...item} />}
-                    keyExtractor={(item) => item.id}
-                    showsVerticalScrollIndicator={false}
-                    className='-mx-3 px-3 pb-3'
-                />
-            </View>
+            {
+                !error ?
+                    <FlatList
+                        data={data || skeletonData(3)}
+                        renderItem={({ item }) => (data && !loading) ? <DoctorCardWide {...item} /> : <DoctorCardWideSkeleton />}
+                        keyExtractor={(item) => item.id}
+                        showsVerticalScrollIndicator={false}
+                        className='-mx-4 -my-4 px-8 py-8 min-h-screen'
+                        ListFooterComponent={<View className='h-32' />}
+                    /> :
+                    <View className='mt-12'>
+                        <Text className='font-nunito-semibold text-lg text-center'>No doctors found for this branch!</Text>
+                    </View>
+            }
+
         </SafeAreaView>
-    )
-}
+    );
+};
 
 export default BranchDoctors;

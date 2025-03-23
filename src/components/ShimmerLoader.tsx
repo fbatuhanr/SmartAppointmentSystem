@@ -37,7 +37,7 @@ const ShimmerLine = () => {
 };
 
 const ShimmerLoader: React.FC<ShimmerLoaderProps> = ({ lineCount = 3 }) => (
-  <View className='w-full h-full p-1 justify-between items-center'>
+  <View className='w-full h-full justify-between items-center'>
     {Array.from({ length: lineCount }).map((_, index) => (
       <ShimmerLine key={index} />
     ))}

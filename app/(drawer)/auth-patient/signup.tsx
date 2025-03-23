@@ -5,33 +5,26 @@ import { useForm, Controller } from "react-hook-form";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link } from 'expo-router';
-import { setAccessToken } from '@/src/redux/features/authSlice';
-import { useAppDispatch, useAppSelector } from '@/src/hooks/useRedux';
 
 type FormData = {
-  username: string;
+  fullName: string;
+  email: string;
   password: string;
 };
-const Login = () => {
-  const dispatch = useAppDispatch();
-  const auth = useAppSelector(state => state.auth);
-  console.log('auth:', auth);
-
+const Signup = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues: {
-      username: '', password: ''
+      fullName: '', email: '', password: ''
     }
   });
-  const onSubmit = (data: FormData) => {
-    dispatch(setAccessToken("hehe"));
-  }
+  const onSubmit = (data: FormData) => console.log(data);
 
   return (
     <SafeAreaView className='px-5'>
       <View className='h-full justify-center'>
         <View className='items-center gap-y-2'>
-          <Text className='text-4xl text-dark font-bold'>Welcome Back!</Text>
-          <Text className=''>Use Credentials to acees your account</Text>
+          <Text className='text-4xl text-dark font-bold'>Create an Account</Text>
+          <Text className=''>Please fill this detail to create an account</Text>
         </View>
         <View className='h-14 mt-12 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="user" size={24} color='#9ca3af' className='ps-4 pe-2' />
@@ -49,10 +42,31 @@ const Login = () => {
                 value={value}
               />
             )}
-            name="username"
+            name="fullName"
           />
         </View>
         {errors.username && <Text>This is required.</Text>}
+        <View className='h-14 mt-4 flex-row items-center rounded-xl border border-lightGrey'>
+          <AntDesign name="mail" size={24} color='#9ca3af' className='ps-4 pe-2' />
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                className='flex-1 h-full text-xl pb-1.5'
+                placeholder="Enter Email"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCapitalize="none"
+              />
+            )}
+            name="email"
+          />
+        </View>
+        {errors.email && <Text>This is required.</Text>}
         <View className='h-14 mt-4 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="lock" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller
@@ -68,6 +82,7 @@ const Login = () => {
                 onChangeText={onChange}
                 secureTextEntry={true}
                 value={value}
+                autoCapitalize="none"
               />
             )}
             name="password"
@@ -79,14 +94,14 @@ const Login = () => {
         <Text className='text-primary text-right mt-4 text-lg'>Forgot Password?</Text>
         <TouchableOpacity className='h-14 bg-primary mt-8 rounded-xl items-center justify-center'
           onPress={handleSubmit(onSubmit)}>
-          <Text className='text-xl text-white font-bold'>Log in</Text>
+          <Text className='text-xl text-white font-bold'>Sign Up</Text>
         </TouchableOpacity>
-        <Link href='/auth/signup' className='mt-4 text-primary text-center text-lg font-semibold'>
-          No account yet? Sign up
+        <Link href='/auth-patient/login' className='mt-4 text-primary text-center text-lg font-semibold'>
+          Already have an account? Login
         </Link>
       </View>
     </SafeAreaView>
   )
 }
 
-export default Login
+export default Signup

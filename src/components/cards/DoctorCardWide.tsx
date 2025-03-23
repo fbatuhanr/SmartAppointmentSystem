@@ -2,12 +2,16 @@ import { View, Text, Image, ImageSourcePropType } from 'react-native'
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { Link } from 'expo-router';
+import { defaultDoctorCover } from '@/src/data/defaultValues';
 
 export interface DoctorCardWideProps {
     id: string;
     name: string;
     type: string;
-    branch: string;
+    branch: {
+        id: number;
+        title: string;
+    };
     rating: number;
     description: string;
     cover: ImageSourcePropType;
@@ -19,11 +23,11 @@ const DoctorCardWide: React.FC<DoctorCardWideProps> = ({
     return (
         <View className='flex-row w-full h-32 p-2 mb-2 gap-x-4 rounded-xl bg-white shadow-lg shadow-slate-300 relative'>
             <View className='w-32 h-full rounded-xl overflow-hidden'>
-                <Image source={cover} className='w-full h-full' />
+                <Image source={cover || defaultDoctorCover} className='w-full h-full' />
             </View>
             <View className='flex-1 mt-2'>
                 <Text className='font-nunito-bold text-2xl'>{name}</Text>
-                <Text className='font-nunito-regular text-xl'>{branch}</Text>
+                <Text className='font-nunito-regular text-xl'>{branch?.title}</Text>
             </View>
             <View className='flex-row gap-x-1 mt-2 mr-2'>
                 <AntDesign name="star" size={22} color="#F3C32F" />

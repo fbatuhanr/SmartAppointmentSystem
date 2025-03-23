@@ -2,13 +2,12 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { Link } from 'expo-router';
 import { FlatList } from 'react-native-gesture-handler';
-import ShimmerLoader from '../ShimmerLoader';
 import { useBranch } from '@/src/hooks/branch/useBranch';
 import BranchCard from '../cards/BranchCard';
+import BranchCardSkeleton from '../cards/BranchCardSkeleton';
+import { skeletonData } from '@/src/data/skeletonData';
 
-type BranchesSectionProps = {
-    className?: string;
-}
+
 const BranchesSection = ({ className = '' }) => {
 
     const { getAllBranches } = useBranch();
@@ -21,8 +20,8 @@ const BranchesSection = ({ className = '' }) => {
                 <Link href='/listing/Branches' className='text-primary font-nunito-bold text-lg'>See All</Link>
             </View>
             <FlatList
-                data={data || [{id:1}, {id:2}, {id:3}]}
-                renderItem={!loading ? ({ item }) => <BranchCard {...item} /> : () => <View className='bg-white w-36 h-28 mr-2 py-4 px-2 rounded-xl shadow-md shadow-slate-300 items-center gap-y-1 relative'><ShimmerLoader /></View>}
+                data={data || skeletonData()}
+                renderItem={({ item }) => (data && !loading) ? <BranchCard {...item} /> : <BranchCardSkeleton />}
                 keyExtractor={(item) => item.id}
                 horizontal
                 showsHorizontalScrollIndicator={false}

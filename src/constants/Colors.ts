@@ -1,6 +1,9 @@
-export const Colors = {
+export const COLORS = {
     primary: '#7563F7',
     primaryDark: '#4437A1',
+    
+    secondary: '#F8F7FF',
+    secondaryDark: '#E4E0FF',
 
     dark: '#0E0D18',
     darkish: '#16151f',
@@ -14,4 +17,4 @@ export const Colors = {
     black: '#000000',
     white: '#FFFFFF',
 };
-export default Colors;
+export default COLORS;

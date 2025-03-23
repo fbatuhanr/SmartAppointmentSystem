@@ -7,12 +7,18 @@ import { StatusBar } from 'expo-status-bar';
 import { clipText } from '@/src/utils/textUtils';
 import { getNextDays, getTimeSlots } from '@/src/utils/dateUtils';
 import { FlatList } from 'react-native-gesture-handler';
+import { useDoctor } from '@/src/hooks/doctor/useDoctor';
+import { defaultDoctorCover, defaultDoctorDetail } from '@/src/data/defaultValues';
 
-const ProfessionalDetail: React.FC = () => {
+const DoctorDetail: React.FC = () => {
 
     const { id } = useLocalSearchParams();
-    const { name, branch, description, rating, cover } = sampleProfessionals.find(i => i.id === id) || {};
-    const [data, setData] = useState({name, branch, description, rating, cover});
+
+    const { getDoctorById } = useDoctor();
+    const { data, loading, error } = getDoctorById(id as string);
+
+    const mergedData = { ...defaultDoctorDetail, ...data };
+    const { name, branch, description, rating, cover } = mergedData;
 
     const days = getNextDays(10);
     const times = getTimeSlots(8, 18);
@@ -21,22 +27,6 @@ const ProfessionalDetail: React.FC = () => {
         date: '',
         time: ''
     });
-
-    useEffect(() => {
-    const request = async () => {
-
-        try {
-            const result = await fetch(`https://smartappointmentsystem.onrender.com/api/doctor/${id}`);
-            const response = await result.json();
-            setData(response);
-        }
-        catch {
-
-        }
-    };
-
-    request();
-    }, []);
 
     const Slot = ({ item, type }: { item: string, type: 'Day' | 'Time' }) => {
 
@@ -68,14 +58,14 @@ const ProfessionalDetail: React.FC = () => {
             <StatusBar style='light' />
             <View className='flex-1'>
                 <View className='w-[104%] h-80 -ml-[3%]'>
-                    <Image source={cover} className='w-full h-full' />
+                    <Image source={cover || defaultDoctorCover} className='w-full h-full' />
                 </View>
                 <SafeAreaView className='flex-1 bg-white justify-between'>
                     <View className='-mt-10 bg-white pt-6 px-6 pb-4 rounded-t-[2rem]'>
                         <View className='flex-row justify-between pb-4 border-b border-slate-300'>
                             <View>
                                 <Text className='text-3xl font-nunito-bold'>{name}</Text>
-                                <Text className='text-xl font-nunito-regular'>{branch}</Text>
+                                <Text className='text-xl font-nunito-regular'>{branch?.title}</Text>
                             </View>
                             <View className='flex-row gap-x-1 mt-2 mr-2'>
                                 <AntDesign name="star" size={22} color="#F3C32F" />
@@ -119,4 +109,4 @@ const ProfessionalDetail: React.FC = () => {
     )
 }
 
-export default ProfessionalDetail
+export default DoctorDetail;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Colors } from '@/src/constants/Colors';
+import { COLORS } from '@/src/constants/colors';
 
 export default function TabLayout() {
     return (
@@ -8,7 +8,7 @@ export default function TabLayout() {
             screenOptions={{
                 headerShown: false,
                 sceneStyle:{
-                    backgroundColor: Colors.white
+                    backgroundColor: COLORS.white
                 }
             }}>
             <Tabs.Screen

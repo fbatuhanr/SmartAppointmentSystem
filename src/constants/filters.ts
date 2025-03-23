@@ -1,8 +1,8 @@
-export const FILTERS = {
-    POPULAR: 'popular',
-    NEW: 'new',
-    TOP_RATED: 'top-rated',
-    MOST_BOOKED: 'most-booked'
+const DOCTOR_FILTERS = {
+    POPULAR: 'Popular',
+    NEW: 'New',
+    TOP_RATED: 'Top Rated',
+    MOST_BOOKED: 'Most Booked'
 };
 
-export default FILTERS;
+export { DOCTOR_FILTERS };

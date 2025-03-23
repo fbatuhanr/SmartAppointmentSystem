@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Fontisto } from '@expo/vector-icons'
 import { Link } from 'expo-router'
-import Colors from '@/src/constants/Colors';
+import Colors from '@/src/constants/colors';
 
 export interface BranchCardProps {
     id: string;
