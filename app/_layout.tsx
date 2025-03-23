@@ -102,6 +102,22 @@ export default function RootLayout() {
               )
             })}
           />
+          <Stack.Screen name="profile/ProfileSettings"
+            options={{
+              header: ({ navigation }) => (
+                <SafeAreaView className='bg-white'>
+                  <View className='flex-row px-4 pt-1 pb-4 justify-between items-center relative'>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                      <AntDesign name="left" size={26} color="black" />
+                    </TouchableOpacity>
+                    <View className='absolute top-1 left-0 right-0 items-center'>
+                      <Text className='text-2xl font-nunito-bold'>Profile Settings</Text>
+                    </View>
+                  </View>
+                </SafeAreaView>
+              )
+            }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />

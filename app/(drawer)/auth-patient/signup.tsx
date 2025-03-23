@@ -45,7 +45,7 @@ const Signup = () => {
             name="fullName"
           />
         </View>
-        {errors.username && <Text>This is required.</Text>}
+        {errors.fullName && <Text>This is required.</Text>}
         <View className='h-14 mt-4 flex-row items-center rounded-xl border border-lightGrey'>
           <AntDesign name="mail" size={24} color='#9ca3af' className='ps-4 pe-2' />
           <Controller

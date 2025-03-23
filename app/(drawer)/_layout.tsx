@@ -32,14 +32,14 @@ function CustomDrawerContent(props: any) {
               </View>
               <View className='mt-1'>
                 <Text className='text-xl text-light_1 font-nunito-semibold'>
-                  { decodedToken.Name || 'Welcome to SAS'}
+                  {decodedToken.Name || 'Welcome to SAS'}
                 </Text>
               </View>
             </View>
           </View>
           <View>
             <View className='bg-purple-200 h-0.5 w-full mb-2' />
-              <DrawerItemList {...props} />
+            <DrawerItemList {...props} />
             <View className='bg-purple-200 h-0.5 w-full mt-2' />
           </View>
           <View className='mt-6 gap-y-0.5'>
@@ -81,7 +81,7 @@ export default function DrawerLayout() {
           drawerLabel: ({ focused }) => (
             <View className='flex-row items-center gap-x-3'>
               <View><AntDesign name="home" size={focused ? 24 : 20} color={COLORS.light_1} /></View>
-              <Text className='font-nunito-bold text-light_1' style={{fontSize: focused ? 22 : 18}}>
+              <Text className='font-nunito-bold text-light_1' style={{ fontSize: focused ? 22 : 18 }}>
                 Browse
               </Text>
             </View>
@@ -89,15 +89,15 @@ export default function DrawerLayout() {
         }}
       />
       <Drawer.Screen
-        name="profile"
+        name="ControlCenter"
         options={{
-          title: 'Profile',
+          title: 'Control Center',
           drawerItemStyle: !decodedToken.UserId ? { display: 'none' } : undefined,
           drawerLabel: ({ focused }) => (
             <View className='flex-row items-center gap-x-3'>
               <View><AntDesign name="setting" size={focused ? 24 : 20} color={COLORS.light_1} /></View>
-              <Text className='font-nunito-bold text-light_1' style={{fontSize: focused ? 22 : 18}}>
-                Profile
+              <Text className='font-nunito-bold text-light_1' style={{ fontSize: focused ? 22 : 18 }}>
+                Control Center
               </Text>
             </View>
           ),
@@ -112,7 +112,7 @@ export default function DrawerLayout() {
           drawerLabel: ({ focused }) => (
             <View className='flex-row items-center gap-x-3'>
               <View><AntDesign name="login" size={focused ? 24 : 20} color={COLORS.light_1} /></View>
-              <Text className='font-nunito-bold text-light_1' style={{fontSize: focused ? 22 : 18}}>
+              <Text className='font-nunito-bold text-light_1' style={{ fontSize: focused ? 22 : 18 }}>
                 Doctor
               </Text>
             </View>
@@ -128,8 +128,8 @@ export default function DrawerLayout() {
           drawerLabel: ({ focused }) => (
             <View className='flex-row items-center gap-x-3'>
               <View><AntDesign name="login" size={focused ? 24 : 20} color={COLORS.light_1} /></View>
-              <Text className='font-nunito-bold text-light_1' style={{fontSize: focused ? 22 : 18}}>
-              Patient
+              <Text className='font-nunito-bold text-light_1' style={{ fontSize: focused ? 22 : 18 }}>
+                Patient
               </Text>
             </View>
           )

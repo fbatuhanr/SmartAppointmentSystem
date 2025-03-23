@@ -1,12 +1,12 @@
 import React from 'react';
-import { useNavigation } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
 import { defaultDoctorCover } from '@/src/data/defaultValues';
 
-const Profile = () => {
+const ControlCenter = () => {
   const navigation = useNavigation();
   const parentNavigation = navigation.getParent() as DrawerNavigationProp<any>;
 
@@ -44,7 +44,7 @@ const Profile = () => {
             <AntDesign name="right" size={24} color="black" />
           </TouchableOpacity>
           <View className='bg-slate-300 h-0.5' />
-          <TouchableOpacity onPress={() => { }} className='flex-row justify-between items-center p-4'>
+          <TouchableOpacity onPress={() => router.push('/profile/ProfileSettings')} className='flex-row justify-between items-center p-4'>
             <View className='flex-row items-center gap-x-3'>
               <View className='w-12 h-12 items-center justify-center relative'>
                 <View className='bg-secondaryDark absolute top-0 right-0 bottom-0 left-0 rounded-xl' />
@@ -60,4 +60,4 @@ const Profile = () => {
   )
 }
 
-export default Profile;
+export default ControlCenter;
