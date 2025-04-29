@@ -20,7 +20,7 @@ const Home = () => {
   const decodedToken = useDecodedToken();
 
   useEffect(() => {
-    router.push('/(drawer)/profile');
+    router.push('/profile/ProfileSettings');
     // parentNavigation.openDrawer();
   }, [])
   return (
